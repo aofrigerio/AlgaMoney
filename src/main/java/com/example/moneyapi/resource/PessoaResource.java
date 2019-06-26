@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class PessoaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Pessoa> gravar(@RequestBody Pessoa pessoa, HttpServletResponse response) {
+	public ResponseEntity<Pessoa> gravar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 		
