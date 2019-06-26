@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.moneyapi.event.RecursoCriadoEvent;
 import com.example.moneyapi.model.Pessoa;
 import com.example.moneyapi.repository.PessoaRepository;
 
@@ -27,15 +30,18 @@ public class PessoaResource {
 	@Autowired
 	PessoaRepository pessoaRepository;
 	
+	@Autowired
+	private ApplicationEventPublisher publisher;
+	
 	@GetMapping
 	public List<Pessoa> listar(){
 		return pessoaRepository.findAll();
 	}
 	
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long id){
+	public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long codigo){
 		
-		Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+		Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
 		
 		if (pessoa.isPresent())
 			return ResponseEntity.ok(pessoa);
@@ -48,11 +54,9 @@ public class PessoaResource {
 		
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 		
-		URI uri = ServletUriComponentsBuilder
-				.fromCurrentRequestUri().path("/{codigo}")
-				.buildAndExpand(pessoaSalva.getId()).toUri();
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getId()));
 		
-		return ResponseEntity.created(uri).body(pessoaSalva);
+		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 	}
 
 }
