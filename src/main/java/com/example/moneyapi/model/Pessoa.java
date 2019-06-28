@@ -25,11 +25,11 @@ public class Pessoa {
 	@Embedded
 	private Endereco endereco;
 
-	public Long getId() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setId(Long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
