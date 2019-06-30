@@ -1,6 +1,5 @@
 package com.example.moneyapi.resource;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,15 +14,16 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.moneyapi.event.RecursoCriadoEvent;
 import com.example.moneyapi.model.Categoria;
 import com.example.moneyapi.repository.CategoriaRepository;
+import com.example.moneyapi.service.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
@@ -31,6 +31,9 @@ public class CategoriaResource {
 	
 	@Autowired
 	CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	CategoriaService categoriaService;
 	
 	@Autowired
 	ApplicationEventPublisher publisher;
@@ -58,6 +61,14 @@ public class CategoriaResource {
 			return ResponseEntity.ok(categoria);
 		else
 			return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping("/{codigo}")
+	public ResponseEntity<Categoria> editar(@PathVariable Long codigo, @RequestBody Categoria categoria) {
+
+		Categoria categoriaSalva = categoriaService.editar(codigo, categoria);
+		
+		return ResponseEntity.ok(categoriaSalva);
 	}
 	
 	@DeleteMapping("/{codigo}")

@@ -22,5 +22,15 @@ public class PessoaService {
 		
 		return pessoaRepository.save(pessoaSalva);
 	}
+	
+	public Pessoa findById(Long codigo) {
+		return pessoaRepository.findById(codigo).orElseThrow(() -> new EmptyResultDataAccessException(1));
+	}
+	
+	public void atualziarPropriedadeAtivo(Long codigo, Boolean ativo) {
+		Pessoa pessoaSalva = pessoaRepository.findById(codigo).orElseThrow(() -> new EmptyResultDataAccessException(1));
+		pessoaSalva.setAtivo(ativo);
+		pessoaRepository.save(pessoaSalva);
+	}
 
 }
