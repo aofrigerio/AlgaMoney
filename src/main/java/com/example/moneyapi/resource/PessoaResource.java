@@ -6,10 +6,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.moneyapi.event.RecursoCriadoEvent;
 import com.example.moneyapi.model.Pessoa;
 import com.example.moneyapi.repository.PessoaRepository;
+import com.example.moneyapi.repository.filter.LancamentoFilter;
 import com.example.moneyapi.service.PessoaService;
 
 @RestController
@@ -41,7 +40,7 @@ public class PessoaResource {
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Pessoa> listar(){
+	public List<Pessoa> pesquisar(LancamentoFilter filter){
 		return pessoaRepository.findAll();
 	}
 	
