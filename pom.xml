@@ -75,7 +75,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
 		</dependency>
-<<<<<<< HEAD
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-security</artifactId>
@@ -86,14 +85,12 @@
 			<artifactId>spring-security-oauth2</artifactId>
 			<version>2.3.5.RELEASE</version>
 		</dependency>
-
-=======
 		
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
->>>>>>> 416e0207e9e3d2caf23f1334e0d9e91a2ff0478a
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-jwt</artifactId>
+    <version>1.0.10.RELEASE</version>
+</dependency>
 
 	</dependencies>
 
