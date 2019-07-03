@@ -42,7 +42,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
 	}
 
-
+	//Predicates são restrinções, ou seja, parâmetros.
 	private Predicate[] criarRestrinções(LancamentoFilter lancamentoFilter, CriteriaBuilder builder,
 			Root<Lancamento> root) {
 		
