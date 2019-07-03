@@ -30,17 +30,18 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
 			.withClient("angular")
 			.secret("@ngular0")
 			.scopes("read","write")
-			.authorizedGrantTypes("password")
-			.accessTokenValiditySeconds(1800); //quanto tempo o token vai ficar válido
+			.authorizedGrantTypes("password","refresh_token") //Adicionado o Refresh token
+			.accessTokenValiditySeconds(1300) //quanto tempo o token vai ficar válido principal com senha
+			.refreshTokenValiditySeconds(3600 * 24); //neste caso, é o refresh token, para não ficar logando
 	}
 
-	
 	//tipo de token criado
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints
 			.tokenStore(tokenStore())
 			.accessTokenConverter(accessTokenConverter())
+			.reuseRefreshTokens(false) //não reutilizar o refresh token gerado
 			.authenticationManager(authenticationManager);
 		
 	}
