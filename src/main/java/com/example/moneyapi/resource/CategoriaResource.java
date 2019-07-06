@@ -58,6 +58,7 @@ public class CategoriaResource {
 	}
 	
 	@GetMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA')")
 	public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long codigo) {
 		
 		Optional<Categoria> categoria = categoriaRepository.findById(codigo);   
@@ -68,6 +69,7 @@ public class CategoriaResource {
 	}
 	
 	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_EDITAR_CATEGORIA')")
 	public ResponseEntity<Categoria> editar(@PathVariable Long codigo, @RequestBody Categoria categoria) {
 
 		Categoria categoriaSalva = categoriaService.editar(codigo, categoria);
@@ -77,6 +79,7 @@ public class CategoriaResource {
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ROLE_REMOVER_CATEGORIA')")
 	public void remover(@PathVariable Long codigo) {
 		categoriaRepository.deleteById(codigo);
 	}
