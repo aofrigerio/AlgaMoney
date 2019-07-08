@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.moneyapi.event.RecursoCriadoEvent;
 import com.example.moneyapi.model.Pessoa;
 import com.example.moneyapi.repository.PessoaRepository;
-import com.example.moneyapi.repository.filter.LancamentoFilter;
 import com.example.moneyapi.repository.filter.PessoaFilter;
 import com.example.moneyapi.service.PessoaService;
 

@@ -1,7 +1,6 @@
 package com.example.moneyapi.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.core.annotation.Order;
 
 @ConfigurationProperties("algamoney")
 public class AlgamoneyApiProperty {
