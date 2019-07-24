@@ -25,12 +25,15 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery{
 
 	@Override
 	public List<Pessoa> filtrar(PessoaFilter pessoaFilter) {
-
+		
+		//Criar uma criteriaBuilder para poder executar o filtro
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Pessoa> criteria = builder.createQuery(Pessoa.class);
 		Root<Pessoa> root = criteria.from(Pessoa.class);	
 		
 		//criar as restrições
+		//Responsável para filtrar a consulta.
+		//Nela passa a pessoaFilter, o builder, e o root.
 		Predicate[] predicates = criarRestrincoes(pessoaFilter, builder, root);
 		criteria.where(predicates);
 		

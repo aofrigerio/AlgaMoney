@@ -1,4 +1,4 @@
-package com.example.moneyapi.resource;
+package com.example.moneyapi.repository.pessoa;
 
 import java.util.List;
 import java.util.Optional;

@@ -20,9 +20,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import com.example.moneyapi.token.CustomTokenEnhancer;
 
+@Profile("oauth-security")
 @Configuration
 @EnableAuthorizationServer
-@Profile("oauth-security")
 public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
